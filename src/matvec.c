@@ -41,14 +41,17 @@ Vector4 vec4_scalar_mul(Vector4 in, float scalar) {
 
 
 Vector2 vec2_scalar_div(Vector2 in, float scalar) {
+    if(scalar == 0) return (Vector2){0, 0};
     return (Vector2){in.x / scalar, in.y / scalar};
 }
 
 Vector3 vec3_scalar_div(Vector3 in, float scalar) {
+    if(scalar == 0) return (Vector3){0, 0, 0};
     return (Vector3){in.x / scalar, in.y / scalar, in.z / scalar};
 }
 
 Vector4 vec4_scalar_div(Vector4 in, float scalar) {
+    if(scalar == 0) return (Vector4){0, 0, 0};
     return (Vector4){in.x / scalar, in.y / scalar, in.z / scalar, in.w / scalar};
 }
 
@@ -124,15 +127,24 @@ float vec4_len(Vector4 in) {
 
 
 float vec2_angle(Vector2 a, Vector2 b) {
-    return acosf(vec2_dot(a, b)/(vec2_len(a)*vec2_len(b)));
+    float la = vec2_len(a);
+    float lb = vec2_len(b);
+    if(la == 0 || lb == 0) return 0;
+    return acosf(vec2_dot(a, b)/(la*lb));
 }
 
 float vec3_angle(Vector3 a, Vector3 b) {
-    return acosf(vec3_dot(a, b)/(vec3_len(a)*vec3_len(b)));
+    float la = vec3_len(a);
+    float lb = vec3_len(b);
+    if(la == 0 || lb == 0) return 0;
+    return acosf(vec3_dot(a, b)/(la*lb));
 }
 
 float vec4_angle(Vector4 a, Vector4 b) {
-    return acosf(vec4_dot(a, b)/(vec4_len(a)*vec4_len(b)));
+    float la = vec4_len(a);
+    float lb = vec4_len(b);
+    if(la == 0 || lb == 0) return 0;
+    return acosf(vec4_dot(a, b)/(la*lb));
 }
 
 
@@ -327,18 +339,23 @@ Mat4 mat4_rotation(float r1, float r2, float r3) {
 
 Mat4 mat4_orthogonal(float left, float right, float bottom, float top, float zNear, float zFar) {
     Mat4 ret = mat4(1);
-    ret.m[0] = 2 / (right - left);
-    ret.m[5] = 2 / (top - bottom);
-    ret.m[10] = 1 / (zFar - zNear);
-    ret.m[12] = (right + left) / (right - left);
-    ret.m[13] = (top + bottom) / (top - bottom);
-    ret.m[14] = zNear / (zFar - zNear);
+    float width = right - left;
+    float height = top - bottom;
+    float zDist = zFar - zNear;
+    if(width == 0 || height == 0 || zDist == 0) return mat4(0);
+    ret.m[0] = 2 / width;
+    ret.m[5] = 2 / height;
+    ret.m[10] = 1 / zDist;
+    ret.m[12] = (right + left) / width;
+    ret.m[13] = (top + bottom) / height;
+    ret.m[14] = zNear / zDist;
     return ret;
 }
 
 Mat4 mat4_perspective(float fovy, float aspect, float zNear, float zFar) {
     float tanHalfFovy = tanf(fovy / 2);
     Mat4 ret = mat4(0);
+    if(aspect == 0 || tanHalfFovy == 0 || zFar == zNear) return mat4(0);
     ret.m[0] = 1 / (aspect * tanHalfFovy);
     ret.m[5] = 1 / tanHalfFovy;
     ret.m[10] = zFar / (zNear - zFar);
