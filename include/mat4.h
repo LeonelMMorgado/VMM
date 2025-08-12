@@ -1,7 +1,7 @@
 #ifndef _MAT4_H
 #define _MAT4_H
 
-#include <vec4.h>
+#include "vec4.h"
 
 //TODO: add look_at()
 
