@@ -1,6 +1,8 @@
 #ifndef _MAT4_H
 #define _MAT4_H
 
+#include <vec4.h>
+
 //TODO: add look_at()
 
 typedef struct _mat4 {
