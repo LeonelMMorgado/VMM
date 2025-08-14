@@ -1,4 +1,5 @@
 #include <math.h>
+#include <vec3.h>
 #include <vec4.h>
 #include <mat4.h>
 
@@ -86,5 +87,35 @@ Mat4 mat4_rotation(float r1, float r2, float r3) {
     ret.m[8] = -sy;
     ret.m[9] = cy * sx;
     ret.m[10] = cy * cx;
+    return ret;
+}
+
+Mat4 mat4_look_at(Vector3 eye, Vector3 center, Vector3 up) {
+    Mat4 ret = mat4(1);
+
+    Vector3 forward = vec3_sub(center, eye);
+    forward = vec3_normalize(forward);
+
+    Vector3 right = vec3_cross(up, forward);
+    right = vec3_normalize(right);
+
+    Vector3 new_up = vec3_cross(forward, right);
+    ret.m[0] = right.x;
+    ret.m[1] = right.y;
+    ret.m[2] = right.z;
+    ret.m[3] = 0.0f;
+    ret.m[4] = new_up.x;
+    ret.m[5] = new_up.y;
+    ret.m[6] = new_up.z;
+    ret.m[7] = 0.0f;
+    ret.m[8] = -forward.x;
+    ret.m[9] = -forward.y;
+    ret.m[10] = -forward.z;
+    ret.m[11] = 0.0f;
+    ret.m[12] = -vec3_dot(right, eye);
+    ret.m[13] = -vec3_dot(new_up, eye);
+    ret.m[14] = vec3_dot(forward, eye);
+    ret.m[15] = 1.0f;
+
     return ret;
 }

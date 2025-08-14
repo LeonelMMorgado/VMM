@@ -1,5 +1,5 @@
 #include <math.h>
-#include <mat4.h>
+#include "mat4.h"
 
 Mat4 mat4_orthogonal(float left, float right, float bottom, float top, float zNear, float zFar) {
     Mat4 ret = mat4(1);
