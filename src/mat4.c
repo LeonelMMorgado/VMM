@@ -119,3 +119,12 @@ Mat4 mat4_look_at(Vector3 eye, Vector3 center, Vector3 up) {
 
     return ret;
 }
+
+Mat4 mat4_make_model(Vector3 position, Vector3 rotation, Vector3 scale) {
+    Mat4 trans = mat4_translation(position.x, position.y, position.z);
+    Mat4 rotat = mat4_rotation(rotation.x, rotation.y, rotation.z);
+    Mat4 mscal = mat4_scale(scale.x, scale.y, scale.z);
+    Mat4 model = mat4_mul(mscal, rotat);
+    Mat4 nmodl = mat4_mul(model, trans);
+    return nmodl;
+}
