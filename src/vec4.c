@@ -1,5 +1,10 @@
 #include <math.h>
 #include <vec4.h>
+#include <stdbool.h>
+
+bool vec4_equal_vec(Vector4 a, Vector4 b) {
+    return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
+}
 
 Vector4 vec4_scalar_add(Vector4 in, float scalar) {
     return (Vector4){in.x + scalar, in.y + scalar, in.z + scalar, in.w + scalar};

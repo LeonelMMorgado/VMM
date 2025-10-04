@@ -1,5 +1,10 @@
 #include <math.h>
 #include <vec2.h>
+#include <stdbool.h>
+
+bool vec2_equal_vec(Vector2 a, Vector2 b) {
+    return a.x == b.x && a.y == b.y;
+}
 
 Vector2 vec2_scalar_add(Vector2 in, float scalar) {
     return (Vector2){in.x + scalar, in.y + scalar};
