@@ -35,6 +35,30 @@ Vector4 vec4_sub(Vector4 a, Vector4 b) {
     return (Vector4){a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w};
 }
 
+Vector4 vec4_mul(Vector4 a, Vector4 b) {
+    return (Vector4){a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w};
+}
+
+Vector4 vec4_div(Vector4 a, Vector4 b) {
+    if(b.x == 0.0) {
+        a.x = 0.0;
+        b.x = 1.0;
+    }
+    if(b.y == 0.0) {
+        a.y = 0.0;
+        b.y = 1.0;
+    }
+    if(b.z == 0.0) {
+        a.z = 0.0;
+        b.z = 1.0;
+    }
+    if(b.w == 0.0) {
+        a.w = 0.0;
+        b.w = 1.0;
+    }
+    return (Vector4){a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w};
+}
+
 float vec4_dot(Vector4 a, Vector4 b) {
     return (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
 }

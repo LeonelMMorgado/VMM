@@ -35,6 +35,22 @@ Vector2 vec2_sub(Vector2 a, Vector2 b) {
     return (Vector2){a.x - b.x, a.y - b.y};
 }
 
+Vector2 vec4_mul(Vector2 a, Vector2 b) {
+    return (Vector2){a.x * b.x, a.y * b.y};
+}
+
+Vector2 vec4_div(Vector2 a, Vector2 b) {
+    if(b.x == 0.0) {
+        a.x = 0.0;
+        b.x = 1.0;
+    }
+    if(b.y == 0.0) {
+        a.y = 0.0;
+        b.y = 1.0;
+    }
+    return (Vector2){a.x / b.x, a.y / b.y};
+}
+
 float vec2_dot(Vector2 a, Vector2 b) {
     return (a.x * b.x) + (a.y * b.y);
 }

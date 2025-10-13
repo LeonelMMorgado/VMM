@@ -35,6 +35,14 @@ IVector3 ivec3_sub(IVector3 a, IVector3 b) {
     return (IVector3){a.x - b.x, a.y - b.y, a.z - b.z};
 }
 
+IVector3 ivec3_mul(IVector3 a, IVector3 b) {
+    return (IVector3){a.x * b.x, a.y * b.y, a.z * b.z};
+}
+
+IVector3 ivec3_div(IVector3 a, IVector3 b) {
+    return (IVector3){a.x / b.x, a.y / b.y, a.z / b.z};
+}
+
 float ivec3_dot(IVector3 a, IVector3 b) {
     return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }

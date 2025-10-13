@@ -35,6 +35,26 @@ Vector3 vec3_sub(Vector3 a, Vector3 b) {
     return (Vector3){a.x - b.x, a.y - b.y, a.z - b.z};
 }
 
+Vector3 vec4_mul(Vector3 a, Vector3 b) {
+    return (Vector3){a.x * b.x, a.y * b.y, a.z * b.z};
+}
+
+Vector3 vec4_div(Vector3 a, Vector3 b) {
+    if(b.x == 0.0) {
+        a.x = 0.0;
+        b.x = 1.0;
+    }
+    if(b.y == 0.0) {
+        a.y = 0.0;
+        b.y = 1.0;
+    }
+    if(b.z == 0.0) {
+        a.z = 0.0;
+        b.z = 1.0;
+    }
+    return (Vector3){a.x / b.x, a.y / b.y, a.z / b.z};
+}
+
 float vec3_dot(Vector3 a, Vector3 b) {
     return (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
 }
