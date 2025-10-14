@@ -2,6 +2,26 @@
 #include <ivec3.h>
 #include <stdbool.h>
 
+IVector3 ivec3_int(int32_t x, int32_t y, int32_t z) {
+    return (IVector3){x, y, z};
+}
+
+IVector3 ivec3_ivec3(IVector3 vec) {
+    return vec;
+}
+
+IVector3 ivec3_vec3(Vector3 vec) {
+    return (IVector3){(int32_t)vec.x, (int32_t)vec.y, (int32_t)vec.z};
+}
+
+IVector3 ivec3_zero(void) {
+    return (IVector3){0};
+}
+
+IVector3 ivec3_one(void) {
+    return (IVector3){1, 1, 1};
+}
+
 bool ivec3_equal_vec(IVector3 a, IVector3 b) {
     return a.x == b.x && a.y && b.y && a.z == b.z;
 }

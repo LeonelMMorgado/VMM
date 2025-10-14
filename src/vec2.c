@@ -2,6 +2,22 @@
 #include <vec2.h>
 #include <stdbool.h>
 
+Vector2 vec2_float(float x, float y) {
+    return (Vector2){x, y};
+}
+
+Vector2 vec2_vec2(Vector2 vec) {
+    return vec;
+}
+
+Vector2 vec2_zero(void) {
+    return (Vector2){0};
+}
+
+Vector2 vec2_one(void) {
+    return (Vector2){1.0, 1.0, 1.0};
+}
+
 bool vec2_equal_vec(Vector2 a, Vector2 b) {
     return a.x == b.x && a.y == b.y;
 }

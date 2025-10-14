@@ -4,11 +4,31 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-typedef struct _ivec3 {
-    int32_t x;
-    int32_t y;
-    int32_t z;
+typedef union _ivec3 {
+    struct {
+        int32_t x;
+        int32_t y;
+        int32_t z;
+    };
+    struct {
+        int32_t r;
+        int32_t g;
+        int32_t b;
+    };
+    struct {
+        int32_t a;
+        int32_t b;
+        int32_t c;
+    };
 } IVector3;
+
+#include "vec3.h"
+
+IVector3 ivec3_int(int32_t x, int32_t y, int32_t z);
+IVector3 ivec3_ivec3(IVector3 vec);
+IVector3 ivec3_vec3(Vector3 vec);
+IVector3 ivec3_zero(void);
+IVector3 ivec3_one(void);
 
 bool ivec3_equal_vec(IVector3 a, IVector3 b);
 

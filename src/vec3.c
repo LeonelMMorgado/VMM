@@ -2,6 +2,30 @@
 #include <vec3.h>
 #include <stdbool.h>
 
+Vector3 vec3_float(float x, float y, float z) {
+    return (Vector3){x, y, z};
+}
+
+Vector3 vec3_vec3(Vector3 vec) {
+    return vec;
+}
+
+Vector3 vec3_vec4(Vector4 vec) {
+    return (Vector3){vec.x, vec.y, vec.z};
+}
+
+Vector3 vec3_ivec3(IVector3 vec) {
+    return (Vector3){(float)vec.x, (float)vec.y, (float)vec.z};
+}
+
+Vector3 vec3_zero(void) {
+    return (Vector3){0};
+}
+
+Vector3 vec3_one(void) {
+    return (Vector3){1.0, 1.0, 1.0};
+}
+
 bool vec3_equal_vec(Vector3 a, Vector3 b) {
     return a.x == b.x && a.y && b.y && a.z == b.z;
 }

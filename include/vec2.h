@@ -3,10 +3,25 @@
 
 #include <stdbool.h>
 
-typedef struct _vec2 {
-    float x;
-    float y;
+typedef union _vec2 {
+    struct {
+        float x;
+        float y;
+    };
+    struct {
+        float u;
+        float v;
+    };
+    struct {
+        float a;
+        float b;
+    };
 } Vector2;
+
+Vector2 vec2_float(float x, float y);
+Vector2 vec2_vec2(Vector2 vec);
+Vector2 vec2_zero(void);
+Vector2 vec2_one(void);
 
 bool vec2_equal_vec(Vector2 a, Vector2 b);
 

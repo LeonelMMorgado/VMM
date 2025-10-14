@@ -2,6 +2,22 @@
 #include <vec4.h>
 #include <stdbool.h>
 
+Vector4 vec4_float(float x, float y, float z, float w) {
+    return (Vector4){x, y, z, w};
+}
+
+Vector4 vec4_vec4(Vector4 vec) {
+    return vec;
+}
+
+Vector4 vec4_zero(void) {
+    return (Vector4){0};
+}
+
+Vector4 vec4_one(void) {
+    return (Vector4){1.0, 1.0, 1.0, 1.0};
+}
+
 bool vec4_equal_vec(Vector4 a, Vector4 b) {
     return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
 }

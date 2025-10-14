@@ -3,11 +3,33 @@
 
 #include <stdbool.h>
 
-typedef struct _vec3 {
-    float x;
-    float y;
-    float z;
+typedef union _vec3 {
+    struct {
+        float x;
+        float y;
+        float z;
+    };
+    struct {
+        float r;
+        float g;
+        float b;
+    };
+    struct {
+        float a;
+        float b;
+        float c;
+    };
 } Vector3;
+
+#include "vec4.h"
+#include "ivec3.h"
+
+Vector3 vec3_float(float x, float y, float z);
+Vector3 vec3_vec3(Vector3 vec);
+Vector3 vec3_vec4(Vector4 vec);
+Vector3 vec3_ivec3(IVector3 vec);
+Vector3 vec3_zero(void);
+Vector3 vec3_one(void);
 
 bool vec3_equal_vec(Vector3 a, Vector3 b);
 
