@@ -15,11 +15,6 @@ typedef union _ivec3 {
         int32_t g;
         int32_t b;
     };
-    struct {
-        int32_t a;
-        int32_t b;
-        int32_t c;
-    };
 } IVector3;
 
 #include "vec3.h"

@@ -14,11 +14,6 @@ typedef union _vec3 {
         float g;
         float b;
     };
-    struct {
-        float a;
-        float b;
-        float c;
-    };
 } Vector3;
 
 #include "vec4.h"

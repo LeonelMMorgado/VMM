@@ -3,13 +3,6 @@
 
 #include <stdbool.h>
 
-typedef struct _vec4 {
-    float x;
-    float y;
-    float z;
-    float w;
-} Vector4;
-
 typedef union _vec4 {
     struct {
         float x;

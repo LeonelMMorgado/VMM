@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 Vector3 vec3_float(float x, float y, float z) {
-    return (Vector3){x, y, z};
+    return (Vector3){{x, y, z}};
 }
 
 Vector3 vec3_vec3(Vector3 vec) {
@@ -11,19 +11,19 @@ Vector3 vec3_vec3(Vector3 vec) {
 }
 
 Vector3 vec3_vec4(Vector4 vec) {
-    return (Vector3){vec.x, vec.y, vec.z};
+    return (Vector3){{vec.x, vec.y, vec.z}};
 }
 
 Vector3 vec3_ivec3(IVector3 vec) {
-    return (Vector3){(float)vec.x, (float)vec.y, (float)vec.z};
+    return (Vector3){{(float)vec.x, (float)vec.y, (float)vec.z}};
 }
 
 Vector3 vec3_zero(void) {
-    return (Vector3){0};
+    return (Vector3){{0}};
 }
 
 Vector3 vec3_one(void) {
-    return (Vector3){1.0, 1.0, 1.0};
+    return (Vector3){{1.0, 1.0, 1.0}};
 }
 
 bool vec3_equal_vec(Vector3 a, Vector3 b) {
@@ -31,39 +31,39 @@ bool vec3_equal_vec(Vector3 a, Vector3 b) {
 }
 
 Vector3 vec3_scalar_add(Vector3 in, float scalar) {
-    return (Vector3){in.x + scalar, in.y + scalar, in.z + scalar};
+    return (Vector3){{in.x + scalar, in.y + scalar, in.z + scalar}};
 }
 
 Vector3 vec3_scalar_sub(Vector3 in, float scalar) {
-    return (Vector3){in.x - scalar, in.y - scalar, in.z - scalar};
+    return (Vector3){{in.x - scalar, in.y - scalar, in.z - scalar}};
 }
 
 Vector3 vec3_scalar_mul(Vector3 in, float scalar) {
-    return (Vector3){in.x * scalar, in.y * scalar, in.z * scalar};
+    return (Vector3){{in.x * scalar, in.y * scalar, in.z * scalar}};
 }
 
 Vector3 vec3_scalar_div(Vector3 in, float scalar) {
-    if(scalar == 0) return (Vector3){0, 0, 0};
-    return (Vector3){in.x / scalar, in.y / scalar, in.z / scalar};
+    if(scalar == 0) return (Vector3){{0, 0, 0}};
+    return (Vector3){{in.x / scalar, in.y / scalar, in.z / scalar}};
 }
 
 Vector3 vec3_negate(Vector3 in) {
-    return (Vector3){-in.x, -in.y, -in.z};
+    return (Vector3){{-in.x, -in.y, -in.z}};
 }
 
 Vector3 vec3_add(Vector3 a, Vector3 b) {
-    return (Vector3){a.x + b.x, a.y + b.y, a.z + b.z};
+    return (Vector3){{a.x + b.x, a.y + b.y, a.z + b.z}};
 }
 
 Vector3 vec3_sub(Vector3 a, Vector3 b) {
-    return (Vector3){a.x - b.x, a.y - b.y, a.z - b.z};
+    return (Vector3){{a.x - b.x, a.y - b.y, a.z - b.z}};
 }
 
-Vector3 vec4_mul(Vector3 a, Vector3 b) {
-    return (Vector3){a.x * b.x, a.y * b.y, a.z * b.z};
+Vector3 vec3_mul(Vector3 a, Vector3 b) {
+    return (Vector3){{a.x * b.x, a.y * b.y, a.z * b.z}};
 }
 
-Vector3 vec4_div(Vector3 a, Vector3 b) {
+Vector3 vec3_div(Vector3 a, Vector3 b) {
     if(b.x == 0.0) {
         a.x = 0.0;
         b.x = 1.0;
@@ -76,7 +76,7 @@ Vector3 vec4_div(Vector3 a, Vector3 b) {
         a.z = 0.0;
         b.z = 1.0;
     }
-    return (Vector3){a.x / b.x, a.y / b.y, a.z / b.z};
+    return (Vector3){{a.x / b.x, a.y / b.y, a.z / b.z}};
 }
 
 float vec3_dot(Vector3 a, Vector3 b) {
@@ -84,7 +84,7 @@ float vec3_dot(Vector3 a, Vector3 b) {
 }
 
 Vector3 vec3_cross(Vector3 a, Vector3 b) {
-    return (Vector3){(a.y*b.z)-(a.z*b.y), (a.z*b.x)-(a.x*b.z), (a.x*b.y)-(a.y*b.x)};
+    return (Vector3){{(a.y*b.z)-(a.z*b.y), (a.z*b.x)-(a.x*b.z), (a.x*b.y)-(a.y*b.x)}};
 }
 
 float vec3_len(Vector3 in) {
@@ -100,6 +100,6 @@ float vec3_angle(Vector3 a, Vector3 b) {
 
 Vector3 vec3_normalize(Vector3 in) {
     float len = vec3_len(in);
-    if(len == 0) return (Vector3){0, 0, 0};
+    if(len == 0) return (Vector3){{0, 0, 0}};
     return vec3_scalar_div(in, len);
 }
