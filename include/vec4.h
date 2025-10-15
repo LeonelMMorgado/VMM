@@ -24,6 +24,9 @@ Vector4 vec4_zero(void);
 Vector4 vec4_one(void);
 
 bool vec4_equal_vec(Vector4 a, Vector4 b);
+Vector4 vec4_max(Vector4 a, Vector4 b);
+Vector4 vec4_abs(Vector4 a);
+Vector4 vec4_sign(Vector4 a);
 
 Vector4 vec4_scalar_add(Vector4 in, float scalar);
 Vector4 vec4_scalar_sub(Vector4 in, float scalar);

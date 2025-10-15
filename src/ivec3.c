@@ -2,9 +2,14 @@
 #include <ivec3.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 int32_t _ivec3_min(int32_t a, int32_t b) {
     return a < b ? a : b;
+}
+
+int32_t _ivec3_max(int32_t a, int32_t b) {
+    return a > b ? a : b;
 }
 
 IVector3 ivec3_int(int32_t x, int32_t y, int32_t z) {
@@ -33,6 +38,18 @@ bool ivec3_equal_vec(IVector3 a, IVector3 b) {
 
 IVector3 ivec3_min(IVector3 a, IVector3 b) {
     return (IVector3){{_ivec3_min(a.x, b.x), _ivec3_min(a.y, b.y), _ivec3_min(a.z, b.z)}};
+}
+
+IVector3 ivec3_max(IVector3 a, IVector3 b) {
+    return (IVector3){{_ivec3_max(a.x, b.x), _ivec3_max(a.y, b.y), _ivec3_max(a.z, b.z)}};
+}
+
+IVector3 ivec3_abs(IVector3 a) {
+    return (IVector3){{abs(a.x), abs(a.y), abs(a.z)}}
+}
+
+IVector3 ivec3_sign(IVector3 a) {
+    return ivec3_div(a, ivec3_abs(a)); //foda->(x > 0) - (x < 0)
 }
 
 IVector3 ivec3_scalar_add(IVector3 in, int scalar) {

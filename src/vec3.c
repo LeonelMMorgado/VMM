@@ -34,6 +34,18 @@ Vector3 vec3_min(Vector3 a, Vector3 b) {
     return (Vector3){{fminf(a.x, b.x), fminf(a.y, b.y), fminf(a.z, b.z)}};
 }
 
+Vector3 vec3_max(Vector3 a, Vector3 b) {
+    return (Vector3){{fmaxf(a.x, b.x), fmaxf(a.y, b.y), fmaxf(a.z, b.z)}};
+}
+
+Vector3 vec3_abs(Vector3 a) {
+    return (Vector3){{fabsf(a.x), fabsf(a.y), fabsf(a.z)}};
+}
+
+Vector3 vec3_sign(Vector3 a) {
+    return vec3_div(a, vec3_abs(a));
+}
+
 Vector3 vec3_scalar_add(Vector3 in, float scalar) {
     return (Vector3){{in.x + scalar, in.y + scalar, in.z + scalar}};
 }

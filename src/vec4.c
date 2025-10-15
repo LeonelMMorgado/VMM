@@ -26,6 +26,18 @@ Vector4 vec4_min(Vector4 a, Vector4 b) {
     return (Vector4){{fminf(a.x, b.x), fminf(a.y, b.y), fminf(a.z, b.z), fminf(a.w, b.w)}};
 }
 
+Vector4 vec4_max(Vector4 a, Vector4 b) {
+    return (Vector4){{fmaxf(a.x, b.x), fmaxf(a.y, b.y), fmaxf(a.z, b.z), fmaxf(a.w, b.w)}};
+}
+
+Vector4 vec4_abs(Vector4 a) {
+    return (Vector4){{fabsf(a.x), fabsf(a.y), fabsf(a.z), fabsf(a.w)}};
+}
+
+Vector4 vec4_sign(Vector4 a) {
+    return vec4_div(a, vec4_abs(a));
+}
+
 Vector4 vec4_scalar_add(Vector4 in, float scalar) {
     return (Vector4){{in.x + scalar, in.y + scalar, in.z + scalar, in.w + scalar}};
 }
