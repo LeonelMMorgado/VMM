@@ -45,7 +45,7 @@ IVector3 ivec3_max(IVector3 a, IVector3 b) {
 }
 
 IVector3 ivec3_abs(IVector3 a) {
-    return (IVector3){{abs(a.x), abs(a.y), abs(a.z)}}
+    return (IVector3){{abs(a.x), abs(a.y), abs(a.z)}};
 }
 
 IVector3 ivec3_sign(IVector3 a) {
