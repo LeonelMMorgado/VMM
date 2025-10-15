@@ -22,6 +22,10 @@ bool vec2_equal_vec(Vector2 a, Vector2 b) {
     return a.x == b.x && a.y == b.y;
 }
 
+Vector2 vec2_min(Vector2 a, Vector2 b) {
+    return (Vector2){{fminf(a.x, b.x), fminf(a.y, b.y)}};
+}
+
 Vector2 vec2_scalar_add(Vector2 in, float scalar) {
     return (Vector2){{in.x + scalar, in.y + scalar}};
 }

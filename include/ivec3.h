@@ -26,6 +26,7 @@ IVector3 ivec3_zero(void);
 IVector3 ivec3_one(void);
 
 bool ivec3_equal_vec(IVector3 a, IVector3 b);
+IVector3 ivec3_min(IVector3 a, IVector3 b);
 
 IVector3 ivec3_scalar_add(IVector3 in, int scalar);
 IVector3 ivec3_scalar_sub(IVector3 in, int scalar);

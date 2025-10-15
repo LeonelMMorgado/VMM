@@ -30,6 +30,10 @@ bool vec3_equal_vec(Vector3 a, Vector3 b) {
     return a.x == b.x && a.y && b.y && a.z == b.z;
 }
 
+Vector3 vec3_min(Vector3 a, Vector3 b) {
+    return (Vector3){{fminf(a.x, b.x), fminf(a.y, b.y), fminf(a.z, b.z)}};
+}
+
 Vector3 vec3_scalar_add(Vector3 in, float scalar) {
     return (Vector3){{in.x + scalar, in.y + scalar, in.z + scalar}};
 }

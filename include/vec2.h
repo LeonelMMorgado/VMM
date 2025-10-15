@@ -24,6 +24,7 @@ Vector2 vec2_zero(void);
 Vector2 vec2_one(void);
 
 bool vec2_equal_vec(Vector2 a, Vector2 b);
+Vector2 vec2_min(Vector2 a, Vector2 b);
 
 Vector2 vec2_scalar_add(Vector2 in, float scalar);
 Vector2 vec2_scalar_sub(Vector2 in, float scalar);

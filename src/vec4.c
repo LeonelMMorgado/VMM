@@ -22,6 +22,10 @@ bool vec4_equal_vec(Vector4 a, Vector4 b) {
     return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w;
 }
 
+Vector4 vec4_min(Vector4 a, Vector4 b) {
+    return (Vector4){{fminf(a.x, b.x), fminf(a.y, b.y), fminf(a.z, b.z), fminf(a.w, b.w)}};
+}
+
 Vector4 vec4_scalar_add(Vector4 in, float scalar) {
     return (Vector4){{in.x + scalar, in.y + scalar, in.z + scalar, in.w + scalar}};
 }

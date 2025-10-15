@@ -27,6 +27,7 @@ Vector3 vec3_zero(void);
 Vector3 vec3_one(void);
 
 bool vec3_equal_vec(Vector3 a, Vector3 b);
+Vector3 vec3_min(Vector3 a, Vector3 b);
 
 Vector3 vec3_scalar_add(Vector3 in, float scalar);
 Vector3 vec3_scalar_sub(Vector3 in, float scalar);
