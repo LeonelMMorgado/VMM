@@ -26,6 +26,31 @@ Vector3 vec3_one(void) {
     return (Vector3){{1.0, 1.0, 1.0}};
 }
 
+Vector3 vec3_left(void) {
+    return (Vector3){{-1.0, 0.0, 0.0}};
+}
+
+Vector3 vec3_right(void) {
+    return (Vector3){{1.0, 0.0, 0.0}};
+}
+
+Vector3 vec3_back(void) {
+    return (Vector3){{0.0, 0.0, -1.0}};
+}
+
+Vector3 vec3_forward(void) {
+    return (Vector3){{0.0, 0.0, 1.0}};
+}
+
+Vector3 vec3_down(void) {
+    return (Vector3){{0.0, -1.0, 0.0}};
+}
+
+Vector3 vec3_up(void) {
+    return (Vector3){{0.0, 1.0, 0.0}};
+}
+
+
 bool vec3_equal_vec(Vector3 a, Vector3 b) {
     return a.x == b.x && a.y && b.y && a.z == b.z;
 }

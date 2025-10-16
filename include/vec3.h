@@ -25,6 +25,12 @@ Vector3 vec3_vec4(Vector4 vec);
 Vector3 vec3_ivec3(IVector3 vec);
 Vector3 vec3_zero(void);
 Vector3 vec3_one(void);
+Vector3 vec3_left(void);
+Vector3 vec3_right(void);
+Vector3 vec3_back(void);
+Vector3 vec3_forward(void);
+Vector3 vec3_down(void);
+Vector3 vec3_up(void);
 
 bool vec3_equal_vec(Vector3 a, Vector3 b);
 Vector3 vec3_min(Vector3 a, Vector3 b);

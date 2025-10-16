@@ -32,6 +32,31 @@ IVector3 ivec3_one(void) {
     return (IVector3){{1, 1, 1}};
 }
 
+IVector3 ivec3_left(void) {
+    return (IVector3){{-1, 0, 0}};
+}
+
+IVector3 ivec3_right(void) {
+    return (IVector3){{1, 0, 0}};
+}
+
+IVector3 ivec3_back(void) {
+    return (IVector3){{0, 0, -1}};
+}
+
+IVector3 ivec3_forward(void) {
+    return (IVector3){{0, 0, 1}};
+}
+
+IVector3 ivec3_down(void) {
+    return (IVector3){{0, -1, 0}};
+}
+
+IVector3 ivec3_up(void) {
+    return (IVector3){{0, 1, 0}};
+}
+
+
 bool ivec3_equal_vec(IVector3 a, IVector3 b) {
     return a.x == b.x && a.y && b.y && a.z == b.z;
 }

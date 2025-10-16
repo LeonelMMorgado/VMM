@@ -18,6 +18,22 @@ Vector2 vec2_one(void) {
     return (Vector2){{1.0, 1.0}};
 }
 
+Vector2 vec2_left(void) {
+    return (Vector2){{-1.0, 0.0}};
+}
+
+Vector2 vec2_right(void) {
+    return (Vector2){{1.0, 0.0}};
+}
+
+Vector2 vec2_down(void) {
+    return (Vector2){{0.0, -1.0}};
+}
+
+Vector2 vec2_up(void) {
+    return (Vector2){{0.0, 1.0}};
+}
+
 bool vec2_equal_vec(Vector2 a, Vector2 b) {
     return a.x == b.x && a.y == b.y;
 }

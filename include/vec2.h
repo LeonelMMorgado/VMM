@@ -22,6 +22,10 @@ Vector2 vec2_float(float x, float y);
 Vector2 vec2_vec2(Vector2 vec);
 Vector2 vec2_zero(void);
 Vector2 vec2_one(void);
+Vector2 vec2_left(void);
+Vector2 vec2_right(void);
+Vector2 vec2_down(void);
+Vector2 vec2_up(void);
 
 bool vec2_equal_vec(Vector2 a, Vector2 b);
 Vector2 vec2_min(Vector2 a, Vector2 b);
