@@ -13,7 +13,7 @@ int32_t _ivec3_max(int32_t a, int32_t b) {
 }
 
 IVector3 ivec3_int(int32_t x, int32_t y, int32_t z) {
-    return (IVector3){{x, y, z}};
+    return (IVector3){.x = x, .y = y, .z = z};
 }
 
 IVector3 ivec3_ivec3(IVector3 vec) {
@@ -21,39 +21,39 @@ IVector3 ivec3_ivec3(IVector3 vec) {
 }
 
 IVector3 ivec3_vec3(Vector3 vec) {
-    return (IVector3){{(int32_t)vec.x, (int32_t)vec.y, (int32_t)vec.z}};
+    return (IVector3){.x = (int32_t)vec.x, .y = (int32_t)vec.y, .z = (int32_t)vec.z};
 }
 
 IVector3 ivec3_zero(void) {
-    return (IVector3){{0}};
+    return (IVector3){.x = 0, .y = 0, .z = 0};
 }
 
 IVector3 ivec3_one(void) {
-    return (IVector3){{1, 1, 1}};
+    return (IVector3){.x = 1, .y = 1, .z = 1};
 }
 
 IVector3 ivec3_left(void) {
-    return (IVector3){{-1, 0, 0}};
+    return (IVector3){.x = -1, .y = 0, .z = 0};
 }
 
 IVector3 ivec3_right(void) {
-    return (IVector3){{1, 0, 0}};
+    return (IVector3){.x = 1, .y = 0, .z = 0};
 }
 
 IVector3 ivec3_back(void) {
-    return (IVector3){{0, 0, -1}};
+    return (IVector3){ .x = 0, .y = 0, .z = -1};
 }
 
 IVector3 ivec3_forward(void) {
-    return (IVector3){{0, 0, 1}};
+    return (IVector3){.x = 0, .y = 0, .z = 1};
 }
 
 IVector3 ivec3_down(void) {
-    return (IVector3){{0, -1, 0}};
+    return (IVector3){.x = 0, .y = -1, .z = 0};
 }
 
 IVector3 ivec3_up(void) {
-    return (IVector3){{0, 1, 0}};
+    return (IVector3){.x = 0, .y = 1, .z = 0};
 }
 
 
@@ -62,56 +62,56 @@ bool ivec3_equal_vec(IVector3 a, IVector3 b) {
 }
 
 IVector3 ivec3_min(IVector3 a, IVector3 b) {
-    return (IVector3){{_ivec3_min(a.x, b.x), _ivec3_min(a.y, b.y), _ivec3_min(a.z, b.z)}};
+    return (IVector3){.x = _ivec3_min(a.x, b.x), .y = _ivec3_min(a.y, b.y), .z = _ivec3_min(a.z, b.z)};
 }
 
 IVector3 ivec3_max(IVector3 a, IVector3 b) {
-    return (IVector3){{_ivec3_max(a.x, b.x), _ivec3_max(a.y, b.y), _ivec3_max(a.z, b.z)}};
+    return (IVector3){.x = _ivec3_max(a.x, b.x), .y = _ivec3_max(a.y, b.y), .z = _ivec3_max(a.z, b.z)};
 }
 
 IVector3 ivec3_abs(IVector3 a) {
-    return (IVector3){{abs(a.x), abs(a.y), abs(a.z)}};
+    return (IVector3){.x = abs(a.x), .y = abs(a.y), .z = abs(a.z)};
 }
 
 IVector3 ivec3_sign(IVector3 a) {
-    return ivec3_div(a, ivec3_abs(a)); //foda->(x > 0) - (x < 0)
+    return ivec3_div(a, ivec3_abs(a));
 }
 
 IVector3 ivec3_scalar_add(IVector3 in, int scalar) {
-    return (IVector3){{in.x + scalar, in.y + scalar, in.z + scalar}};
+    return (IVector3){.x = in.x + scalar, .y = in.y + scalar, .z = in.z + scalar};
 }
 
 IVector3 ivec3_scalar_sub(IVector3 in, int scalar) {
-    return (IVector3){{in.x - scalar, in.y - scalar, in.z - scalar}};
+    return (IVector3){.x = in.x - scalar, .y = in.y - scalar, .z = in.z - scalar};
 }
 
 IVector3 ivec3_scalar_mul(IVector3 in, int scalar) {
-    return (IVector3){{in.x * scalar, in.y * scalar, in.z * scalar}};
+    return (IVector3){.x = in.x * scalar, .y = in.y * scalar, .z = in.z * scalar};
 }
 
 IVector3 ivec3_scalar_div(IVector3 in, int scalar) {
-    if(scalar == 0) return (IVector3){{0, 0, 0}};
-    return (IVector3){{in.x / scalar, in.y / scalar, in.z / scalar}};
+    if(scalar == 0) return (IVector3){.x = 0, .y = 0, .z = 0};
+    return (IVector3){.x = in.x / scalar, .y = in.y / scalar, .z = in.z / scalar};
 }
 
 IVector3 ivec3_negate(IVector3 in) {
-    return (IVector3){{-in.x, -in.y, -in.z}};
+    return (IVector3){.x = -in.x, .y = -in.y, .z = -in.z};
 }
 
 IVector3 ivec3_add(IVector3 a, IVector3 b) {
-    return (IVector3){{a.x + b.x, a.y + b.y, a.z + b.z}};
+    return (IVector3){.x = a.x + b.x, .y = a.y + b.y, .z = a.z + b.z};
 }
 
 IVector3 ivec3_sub(IVector3 a, IVector3 b) {
-    return (IVector3){{a.x - b.x, a.y - b.y, a.z - b.z}};
+    return (IVector3){.x = a.x - b.x, .y = a.y - b.y, .z = a.z - b.z};
 }
 
 IVector3 ivec3_mul(IVector3 a, IVector3 b) {
-    return (IVector3){{a.x * b.x, a.y * b.y, a.z * b.z}};
+    return (IVector3){.x = a.x * b.x, .y = a.y * b.y, .z = a.z * b.z};
 }
 
 IVector3 ivec3_div(IVector3 a, IVector3 b) {
-    return (IVector3){{a.x / b.x, a.y / b.y, a.z / b.z}};
+    return (IVector3){.x = a.x / b.x, .y = a.y / b.y, .z = a.z / b.z};
 }
 
 float ivec3_dot(IVector3 a, IVector3 b) {
@@ -119,7 +119,7 @@ float ivec3_dot(IVector3 a, IVector3 b) {
 }
 
 IVector3 ivec3_cross(IVector3 a, IVector3 b) {
-    return (IVector3){{(a.y*b.z)-(a.z*b.y), (a.z*b.x)-(a.x*b.z), (a.x*b.y)-(a.y*b.x)}};
+    return (IVector3){.x = (a.y*b.z)-(a.z*b.y), .y = (a.z*b.x)-(a.x*b.z), .z = (a.x*b.y)-(a.y*b.x)};
 }
 
 float ivec3_len(IVector3 in) {
@@ -135,6 +135,6 @@ float ivec3_angle(IVector3 a, IVector3 b) {
 
 IVector3 ivec3_normalize(IVector3 in) {
     float len = ivec3_len(in);
-    if(len == 0) return (IVector3){{0, 0, 0}};
+    if(len == 0) return (IVector3){.x = 0, .y = 0, .z = 0};
     return ivec3_scalar_div(in, len);
 }

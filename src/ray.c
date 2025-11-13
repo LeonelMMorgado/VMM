@@ -3,15 +3,15 @@
 #include <math.h>
 
 Ray ray_create(Vector3 origin, Vector3 direction) {
-    return (Ray){origin, direction};
+    return (Ray){.origin = origin, .direction = direction};
 }
 
 Ray ray_change_origin(Ray ray, Vector3 new_origin) {
-    return (Ray){new_origin, ray.direction};
+    return (Ray){.origin = new_origin, .direction = ray.direction};
 }
 
 Ray ray_change_dir(Ray ray, Vector3 new_direction) {
-    return (Ray){ray.origin, new_direction};
+    return (Ray){.origin = ray.origin, .direction = new_direction};
 }
 
 bool ray_hits_box(Ray ray, Vector3 left_bot_back, Vector3 right_top_front, float *tmin, float *tmax) {
