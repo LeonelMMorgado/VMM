@@ -5,17 +5,17 @@
 
 Mat4 mat4(float val) {
     Mat4 ret = {0};
-    ret.m[0] = val;
-    ret.m[5] = val;
-    ret.m[10] = val;
-    ret.m[15] = val;
+    ret.a = val;
+    ret.f = val;
+    ret.k = val;
+    ret.p = val;
     return ret;
 }
 
 Mat4 mat4_scalar(Mat4 in, float scalar) {
     Mat4 ret = {0};
     for(int i = 0; i < 16; i++) {
-        ret.m[i] = in.m[i] * scalar;
+        ret.mat[i] = in.mat[i] * scalar;
     }
     return ret;
 }
@@ -23,7 +23,7 @@ Mat4 mat4_scalar(Mat4 in, float scalar) {
 Mat4 mat4_add(Mat4 a, Mat4 b) {
     Mat4 ret = {0};
     for(int i = 0; i < 16; i++) {
-        ret.m[i] = a.m[i] + b.m[i];
+        ret.mat[i] = a.mat[i] + b.mat[i];
     }
     return ret;
 }
@@ -31,7 +31,7 @@ Mat4 mat4_add(Mat4 a, Mat4 b) {
 Mat4 mat4_sub(Mat4 a, Mat4 b) {
     Mat4 ret = {0};
     for(int i = 0; i < 16; i++) {
-        ret.m[i] = a.m[i] - b.m[i];
+        ret.mat[i] = a.mat[i] - b.mat[i];
     }
     return ret;
 }
@@ -40,33 +40,115 @@ Mat4 mat4_mul(Mat4 a, Mat4 b) {
     Mat4 ret = {0};
     for(int i = 0; i < 4; i++)
         for(int j = 0; j < 4; j++)
-            ret.m[i*4 + j] = (a.m[i*4]*b.m[j])+(a.m[i*4 + 1]*b.m[4 + j])+(a.m[i*4 + 2]*b.m[8 + j])+(a.m[i*4 + 3]*b.m[12+j]);
+            ret.mat[i*4 + j] = (a.mat[i*4]*b.mat[j])+(a.mat[i*4 + 1]*b.mat[4 + j])+(a.mat[i*4 + 2]*b.mat[8 + j])+(a.mat[i*4 + 3]*b.mat[12+j]);
     return ret;
 }
 
 Vector4 mat4_vec4(Mat4 a, Vector4 b) {
     Vector4 ret = {0};
-    ret.x = (a.m[0]*b.x) + (a.m[1]*b.y) + (a.m[2]*b.z) + (a.m[3]*b.w);
-    ret.y = (a.m[4]*b.x) + (a.m[5]*b.y) + (a.m[6]*b.z) + (a.m[7]*b.w);
-    ret.z = (a.m[8]*b.x) + (a.m[9]*b.y) + (a.m[10]*b.z) + (a.m[11]*b.w);
-    ret.w = (a.m[12]*b.x) + (a.m[13]*b.y) + (a.m[14]*b.z) + (a.m[15]*b.w);
+    ret.x = (a.a*b.x) + (a.b*b.y) + (a.c*b.z) + (a.d*b.w);
+    ret.y = (a.e*b.x) + (a.f*b.y) + (a.g*b.z) + (a.h*b.w);
+    ret.z = (a.i*b.x) + (a.j*b.y) + (a.k*b.z) + (a.l*b.w);
+    ret.w = (a.m*b.x) + (a.n*b.y) + (a.o*b.z) + (a.p*b.w);
     return ret;
 }
 
+
+float mat4_det(Mat4 in) {
+    float t[6];
+
+    t[0] = in.k * in.p - in.o * in.l;
+    t[1] = in.j * in.p - in.n * in.l;
+    t[2] = in.j * in.o - in.n * in.k;
+    t[3] = in.i * in.p - in.m * in.l;
+    t[4] = in.i * in.o - in.m * in.k;
+    t[5] = in.i * in.n - in.m * in.j;
+  
+    return in.a * (in.f * t[0] - in.g * t[1] + in.h * t[2])
+         - in.b * (in.e * t[0] - in.g * t[3] + in.h * t[4])
+         + in.c * (in.e * t[1] - in.f * t[3] + in.h * t[5])
+         - in.d * (in.e * t[2] - in.f * t[4] + in.g * t[5]);
+}
+
+Mat4 mat4_transp(Mat4 in) {
+    Mat4 ret = {0};
+
+    ret.a = in.a;
+    ret.b = in.e;
+    ret.c = in.i;
+    ret.d = in.m;
+    ret.e = in.b;
+    ret.f = in.f;
+    ret.g = in.j;
+    ret.h = in.n;
+    ret.i = in.c;
+    ret.j = in.g;
+    ret.k = in.k;
+    ret.l = in.o;
+    ret.m = in.d;
+    ret.n = in.h;
+    ret.o = in.l;
+    ret.p = in.p;
+
+    return ret;
+}
+
+Mat4 mat4_inverse(Mat4 in) {
+    float t[6];
+    float det;
+
+    Mat4 dest;
+    
+    t[0] = in.k * in.p - in.o * in.l; t[1] = in.j * in.p - in.n * in.l; t[2] = in.j * in.o - in.n * in.k;
+    t[3] = in.i * in.p - in.m * in.l; t[4] = in.i * in.o - in.m * in.k; t[5] = in.i * in.n - in.m * in.j;
+    
+    dest.mat[0] =  in.f * t[0] - in.g * t[1] + in.h * t[2];
+    dest.mat[4] =-(in.e * t[0] - in.g * t[3] + in.h * t[4]);
+    dest.mat[8] =  in.e * t[1] - in.f * t[3] + in.h * t[5];
+    dest.mat[12] =-(in.e * t[2] - in.f * t[4] + in.g * t[5]);
+    
+    dest.mat[1] =-(in.b * t[0] - in.c * t[1] + in.d * t[2]);
+    dest.mat[5] =  in.a * t[0] - in.c * t[3] + in.d * t[4];
+    dest.mat[9] =-(in.a * t[1] - in.b * t[3] + in.d * t[5]);
+    dest.mat[13] =  in.a * t[2] - in.b * t[4] + in.c * t[5];
+    
+    t[0] = in.g * in.p - in.o * in.h; t[1] = in.f * in.p - in.n * in.h; t[2] = in.f * in.o - in.n * in.g;
+    t[3] = in.e * in.p - in.m * in.h; t[4] = in.e * in.o - in.m * in.g; t[5] = in.e * in.n - in.m * in.f;
+    
+    dest.mat[2] =  in.b * t[0] - in.c * t[1] + in.d * t[2];
+    dest.mat[6] =-(in.a * t[0] - in.c * t[3] + in.d * t[4]);
+    dest.mat[10]=  in.a * t[1] - in.b * t[3] + in.d * t[5];
+    dest.mat[14]=-(in.a * t[2] - in.b * t[4] + in.c * t[5]);
+    
+    t[0] = in.g * in.l - in.k * in.h; t[1] = in.f * in.l - in.j * in.h; t[2] = in.f * in.k - in.j * in.g;
+    t[3] = in.e * in.l - in.i * in.h; t[4] = in.e * in.k - in.i * in.g; t[5] = in.e * in.j - in.i * in.f;
+    
+    dest.mat[3] =-(in.b * t[0] - in.c * t[1] + in.d * t[2]);
+    dest.mat[7] =  in.a * t[0] - in.c * t[3] + in.d * t[4];
+    dest.mat[11]=-(in.a * t[1] - in.b * t[3] + in.d * t[5]);
+    dest.mat[15]=  in.a * t[2] - in.b * t[4] + in.c * t[5];
+    
+    det = 1.0f / (in.a * dest.mat[0] + in.b * dest.mat[4]
+                + in.c * dest.mat[8] + in.d * dest.mat[12]);
+    
+    return mat4_scalar(dest, det);
+}
+
+
 Mat4 mat4_scale(float s1, float s2, float s3) {
     Mat4 ret = {0};
-    ret.m[0] = s1;
-    ret.m[5] = s2;
-    ret.m[10] = s3;
-    ret.m[15] = 1;
+    ret.a = s1;
+    ret.f = s2;
+    ret.k = s3;
+    ret.p = 1;
     return ret;
 }
 
 Mat4 mat4_translation(float t1, float t2, float t3) {
     Mat4 ret = mat4(1);
-    ret.m[3] = t1;
-    ret.m[7] = t2;
-    ret.m[11] = t3;
+    ret.d = t1;
+    ret.h = t2;
+    ret.l = t3;
     return ret;
 }
 
@@ -78,15 +160,15 @@ Mat4 mat4_rotation(float r1, float r2, float r3) {
     float sz = sinf(r3);
     float sy = sinf(r2);
     float sx = sinf(r1);
-    ret.m[0] = cz * cy;
-    ret.m[1] = -(sz * cx) + (cz * sy * sx);
-    ret.m[2] = (sz * sx) + (cz * sy * cx);
-    ret.m[4] = sz * cy;
-    ret.m[5] = (cz * cx) + (sz * sy * sx);
-    ret.m[6] = -(cz * sx) + (sz * sy * cx);
-    ret.m[8] = -sy;
-    ret.m[9] = cy * sx;
-    ret.m[10] = cy * cx;
+    ret.a = cz * cy;
+    ret.b = -(sz * cx) + (cz * sy * sx);
+    ret.c = (sz * sx) + (cz * sy * cx);
+    ret.e = sz * cy;
+    ret.f = (cz * cx) + (sz * sy * sx);
+    ret.g = -(cz * sx) + (sz * sy * cx);
+    ret.i = -sy;
+    ret.j = cy * sx;
+    ret.k = cy * cx;
     return ret;
 }
 
@@ -100,22 +182,22 @@ Mat4 mat4_look_at(Vector3 eye, Vector3 center, Vector3 up) {
     right = vec3_normalize(right);
 
     Vector3 new_up = vec3_cross(forward, right);
-    ret.m[0] = right.x;
-    ret.m[1] = right.y;
-    ret.m[2] = right.z;
-    ret.m[3] = 0.0f;
-    ret.m[4] = new_up.x;
-    ret.m[5] = new_up.y;
-    ret.m[6] = new_up.z;
-    ret.m[7] = 0.0f;
-    ret.m[8] = -forward.x;
-    ret.m[9] = -forward.y;
-    ret.m[10] = -forward.z;
-    ret.m[11] = 0.0f;
-    ret.m[12] = -vec3_dot(right, eye);
-    ret.m[13] = -vec3_dot(new_up, eye);
-    ret.m[14] = vec3_dot(forward, eye);
-    ret.m[15] = 1.0f;
+    ret.a = right.x;
+    ret.b = right.y;
+    ret.c = right.z;
+    ret.d = 0.0f;
+    ret.e = new_up.x;
+    ret.f = new_up.y;
+    ret.g = new_up.z;
+    ret.h = 0.0f;
+    ret.i = -forward.x;
+    ret.j = -forward.y;
+    ret.k = -forward.z;
+    ret.l = 0.0f;
+    ret.m = -vec3_dot(right, eye);
+    ret.n = -vec3_dot(new_up, eye);
+    ret.o = vec3_dot(forward, eye);
+    ret.p = 1.0f;
 
     return ret;
 }

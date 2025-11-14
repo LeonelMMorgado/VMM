@@ -11,7 +11,7 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 LIB_FILE = $(LIB_DIR)/lib$(FINAL).a
 
-CFLAGS = -g -Wall -I$(INC_DIR)
+CFLAGS = -g -Wall -I$(INC_DIR) -O3
 
 ifeq ($(OS), Windows_NT)
 REMOVE = rmdir /s /q

@@ -4,9 +4,9 @@
 
 Mat3 mat3(float val) {
     Mat3 ret = {0};
-    ret.m[0] = val;
-    ret.m[4] = val;
-    ret.m[8] = val;
+    ret.a = val;
+    ret.d = val;
+    ret.g = val;
     return ret;
 }
 
@@ -19,10 +19,18 @@ Mat3 mat3_scalar(Mat3 in, float scalar) {
 }
 
 Mat3 mat3_add(Mat3 a, Mat3 b) {
+    //Using godbolt, the assembly of this sum and the sum using for is almost the same, but the for uses SIMD for performance so lets choose it
     Mat3 ret = {0};
-    for(int i = 0; i < 9; i++) {
-        ret.m[i] = a.m[i] + b.m[i];
-    }
+    //ret.a = a.a + b.a;
+    //ret.b = a.b + b.b;
+    //ret.c = a.c + b.c;
+    //ret.d = a.d + b.d;
+    //ret.e = a.e + b.e;
+    //ret.f = a.f + b.f;
+    //ret.g = a.g + b.g;
+    //ret.h = a.h + b.h;
+    //ret.i = a.i + b.i;
+    for(int i = 0; i < 9; i++) ret.m[i] = a.m[i] + b.m[i];
     return ret;
 }
 
@@ -44,24 +52,67 @@ Mat3 mat3_mul(Mat3 a, Mat3 b) {
 
 Vector3 mat3_vec3(Mat3 a, Vector3 b) {
     Vector3 ret = {0};
-    ret.x = (a.m[0]*b.x) + (a.m[1]*b.y) + (a.m[2]*b.z);
-    ret.y = (a.m[3]*b.x) + (a.m[4]*b.y) + (a.m[5]*b.z);
-    ret.z = (a.m[6]*b.x) + (a.m[7]*b.y) + (a.m[8]*b.z);
+    ret.x = (a.a*b.x) + (a.b*b.y) + (a.c*b.z);
+    ret.y = (a.d*b.x) + (a.e*b.y) + (a.f*b.z);
+    ret.z = (a.g*b.x) + (a.h*b.y) + (a.i*b.z);
     return ret;
+}
+
+
+float mat3_det(Mat3 a) {
+    //a(ei-hf)-d(bi-ch)+g(bf-ce);
+    return a.a * (a.e * a.i - a.h * a.f)
+         - a.d * (a.b * a.i - a.c * a.h)
+         + a.g * (a.b * a.f - a.c * a.e);
+}
+
+Mat3 mat3_transp(Mat3 a) {
+    Mat3 ret = {0};
+    ret.a = a.m[0];
+    ret.b = a.d;
+    ret.c = a.g;
+    ret.d = a.b;
+    ret.e = a.m[4];
+    ret.f = a.h;
+    ret.g = a.c;
+    ret.h = a.f;
+    ret.i = a.m[8];
+    return ret;
+}
+
+Mat3 mat3_inverse(Mat3 in) {
+    float det;
+    float a = in.a, b = in.b, c = in.c,
+          d = in.d, e = in.e, f = in.f,
+          g = in.g, h = in.h, i = in.i;
+
+    Mat3 dest;
+    dest.a =   e * i - f * h;
+    dest.b = -(b * i - h * c);
+    dest.c =   b * f - e * c;
+    dest.d = -(d * i - g * f);
+    dest.e =   a * i - c * g;
+    dest.f = -(a * f - d * c);
+    dest.g =   d * h - g * e;
+    dest.h = -(a * h - g * b);
+    dest.i =   a * e - b * d;
+
+  det = 1.0f / (a * dest.a + b * dest.d + c * dest.g);
+  return mat3_scalar(dest, det);
 }
 
 Mat3 mat3_scale(float s1, float s2) {
     Mat3 ret = {0};
-    ret.m[0] = s1;
-    ret.m[4] = s2;
-    ret.m[8] = 1;
+    ret.a = s1;
+    ret.e = s2;
+    ret.i = 1;
     return ret;
 }
 
 Mat3 mat3_translation(float t1, float t2) {
     Mat3 ret = mat3(1);
-    ret.m[2] = t1;
-    ret.m[5] = t2;
+    ret.c = t1;
+    ret.f = t2;
     return ret;
 }
 
@@ -69,9 +120,9 @@ Mat3 mat3_rotation(float r1) {
     float cx = cosf(r1);
     float sx = sinf(r1);
     Mat3 ret = mat3(1);
-    ret.m[0] = cx;
-    ret.m[4] = cx;
-    ret.m[1] = -sx;
-    ret.m[3] = sx;
+    ret.a = cx;
+    ret.e = cx;
+    ret.b = -sx;
+    ret.d = sx;
     return ret;
 }
