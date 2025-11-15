@@ -10,6 +10,10 @@ Vector2 vec2_vec2(Vector2 vec) {
     return vec;
 }
 
+Vector2 vec2_ivec2(IVector2 vec) {
+    return (Vector2){.x = (float)vec.x, .y = (float)vec.y};
+}
+
 Vector2 vec2_zero(void) {
     return (Vector2){.x = 0, .y = 0};
 }
