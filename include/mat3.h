@@ -5,7 +5,7 @@
 
 typedef struct {
     union {
-        float m[9];
+        float mat[9];
         struct {
           float a, b, c,
                 d, e, f,

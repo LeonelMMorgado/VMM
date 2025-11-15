@@ -13,7 +13,7 @@ Mat3 mat3(float val) {
 Mat3 mat3_scalar(Mat3 in, float scalar) {
     Mat3 ret = {0};
     for(int i = 0; i < 9; i++) {
-        ret.m[i] = in.m[i] * scalar;
+        ret.mat[i] = in.mat[i] * scalar;
     }
     return ret;
 }
@@ -30,14 +30,14 @@ Mat3 mat3_add(Mat3 a, Mat3 b) {
     //ret.g = a.g + b.g;
     //ret.h = a.h + b.h;
     //ret.i = a.i + b.i;
-    for(int i = 0; i < 9; i++) ret.m[i] = a.m[i] + b.m[i];
+    for(int i = 0; i < 9; i++) ret.mat[i] = a.mat[i] + b.mat[i];
     return ret;
 }
 
 Mat3 mat3_sub(Mat3 a, Mat3 b) {
     Mat3 ret = {0};
     for(int i = 0; i < 9; i++) {
-        ret.m[i] = a.m[i] - b.m[i];
+        ret.mat[i] = a.mat[i] - b.mat[i];
     }
     return ret;
 }
@@ -46,7 +46,7 @@ Mat3 mat3_mul(Mat3 a, Mat3 b) {
     Mat3 ret = {0};
     for(int i = 0; i < 3; i++)
         for(int j = 0; j < 3; j++)
-            ret.m[i*3 + j] = (a.m[i*3]*b.m[j])+(a.m[i*3 + 1]*b.m[3 + j])+(a.m[i*3 + 2]*b.m[6 + j]);
+            ret.mat[i*3 + j] = (a.mat[i*3]*b.mat[j])+(a.mat[i*3 + 1]*b.mat[3 + j])+(a.mat[i*3 + 2]*b.mat[6 + j]);
     return ret;
 }
 
@@ -68,15 +68,15 @@ float mat3_det(Mat3 a) {
 
 Mat3 mat3_transp(Mat3 a) {
     Mat3 ret = {0};
-    ret.a = a.m[0];
+    ret.a = a.mat[0];
     ret.b = a.d;
     ret.c = a.g;
     ret.d = a.b;
-    ret.e = a.m[4];
+    ret.e = a.mat[4];
     ret.f = a.h;
     ret.g = a.c;
     ret.h = a.f;
-    ret.i = a.m[8];
+    ret.i = a.mat[8];
     return ret;
 }
 
