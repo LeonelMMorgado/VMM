@@ -12,7 +12,7 @@ int32_t _ivec2_max(int32_t a, int32_t b) {
     return a > b ? a : b;
 }
 
-IVector2 ivec2_int(int32_t x, int32_t y, int32_t z) {
+IVector2 ivec2_int(int32_t x, int32_t y) {
     return (IVector2){.x = x, .y = y};
 }
 
