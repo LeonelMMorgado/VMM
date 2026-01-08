@@ -50,8 +50,8 @@ Mat3 mat3_mul(Mat3 a, Mat3 b) {
     return ret;
 }
 
-Vector3 mat3_vec3(Mat3 a, Vector3 b) {
-    Vector3 ret = {0};
+Vec3 mat3_vec3(Mat3 a, Vec3 b) {
+    Vec3 ret = {0};
     ret.x = (a.a*b.x) + (a.b*b.y) + (a.c*b.z);
     ret.y = (a.d*b.x) + (a.e*b.y) + (a.f*b.z);
     ret.z = (a.g*b.x) + (a.h*b.y) + (a.i*b.z);

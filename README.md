@@ -1,5 +1,4 @@
 # vmm
 Vector Matrix Math library in C
 
-# TODO
-make VectorX VecX (and break everything in the process)
+Available as include and source files and as a stb-like library header format

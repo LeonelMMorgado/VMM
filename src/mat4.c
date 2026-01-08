@@ -44,8 +44,8 @@ Mat4 mat4_mul(Mat4 a, Mat4 b) {
     return ret;
 }
 
-Vector4 mat4_vec4(Mat4 a, Vector4 b) {
-    Vector4 ret = {0};
+Vec4 mat4_vec4(Mat4 a, Vec4 b) {
+    Vec4 ret = {0};
     ret.x = (a.a*b.x) + (a.b*b.y) + (a.c*b.z) + (a.d*b.w);
     ret.y = (a.e*b.x) + (a.f*b.y) + (a.g*b.z) + (a.h*b.w);
     ret.z = (a.i*b.x) + (a.j*b.y) + (a.k*b.z) + (a.l*b.w);
@@ -172,16 +172,16 @@ Mat4 mat4_rotation(float r1, float r2, float r3) {
     return ret;
 }
 
-Mat4 mat4_look_at(Vector3 eye, Vector3 center, Vector3 up) {
+Mat4 mat4_look_at(Vec3 eye, Vec3 center, Vec3 up) {
     Mat4 ret = mat4(1);
 
-    Vector3 forward = vec3_sub(center, eye);
+    Vec3 forward = vec3_sub(center, eye);
     forward = vec3_normalize(forward);
 
-    Vector3 right = vec3_cross(up, forward);
+    Vec3 right = vec3_cross(up, forward);
     right = vec3_normalize(right);
 
-    Vector3 new_up = vec3_cross(forward, right);
+    Vec3 new_up = vec3_cross(forward, right);
     ret.a = right.x;
     ret.b = right.y;
     ret.c = right.z;
@@ -202,7 +202,7 @@ Mat4 mat4_look_at(Vector3 eye, Vector3 center, Vector3 up) {
     return ret;
 }
 
-Mat4 mat4_make_model(Vector3 position, Vector3 rotation, Vector3 scale) {
+Mat4 mat4_make_model(Vec3 position, Vec3 rotation, Vec3 scale) {
     Mat4 trans = mat4_translation(position.x, position.y, position.z);
     Mat4 rotat = mat4_rotation(rotation.x, rotation.y, rotation.z);
     Mat4 mscal = mat4_scale(scale.x, scale.y, scale.z);
