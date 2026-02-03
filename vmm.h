@@ -7,7 +7,7 @@ In order to use this single file, use the definition for VMM_IMPLEMENTATION befo
 #include ...
 #include ...
 #define VMM_IMPLEMENTATION
-#include "VMM.h"
+#include "vmm.h"
 
 */
 #ifndef VMM_H
@@ -1343,4 +1343,5 @@ bool ray_hits_box(Ray ray, Vec3 left_bot_back, Vec3 right_top_front, float *tmin
 
 #endif //VMM_IMPLEMENTATION
 
-#endif //guard
+#endif //VMM_H
+
