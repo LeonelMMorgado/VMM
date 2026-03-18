@@ -1,11 +1,8 @@
 /*
 
-This product is a fruit of unwanted work from a undergrad student
 for reference of usage, check the tests folder
 
-In order to use this single file, use the definition for VMM_IMPLEMENTATION before including this header:
-#include ...
-#include ...
+In order to use this single file, use the definition for VMM_IMPLEMENTATION before including this header in *one* file:
 #define VMM_IMPLEMENTATION
 #include "vmm.h"
 
@@ -324,6 +321,8 @@ Ray ray_create(Vec3 origin, Vec3 direction);
 Ray ray_change_origin(Ray ray, Vec3 new_origin);
 Ray ray_change_dir(Ray ray, Vec3 new_direction);
 bool ray_hits_box(Ray ray, Vec3 left_bot_back, Vec3 right_top_front, float *tmin, float *tmax);
+
+#endif //VMM_H
 
 #ifdef VMM_IMPLEMENTATION
 Vec2 vec2_float(float x, float y) {
@@ -1340,8 +1339,5 @@ bool ray_hits_box(Ray ray, Vec3 left_bot_back, Vec3 right_top_front, float *tmin
     return true;
 }
 
-
 #endif //VMM_IMPLEMENTATION
-
-#endif //VMM_H
 
