@@ -7,8 +7,8 @@ In order to use this single file, use the definition for VMM_IMPLEMENTATION befo
 #include "vmm.h"
 
 */
-#ifndef VMM_H
-#define VMM_H
+#ifndef _VMM_H
+#define _VMM_H
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -106,6 +106,10 @@ typedef struct {
 typedef struct _ray {
     Vec3 origin, direction;
 } Ray;
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 Vec2 vec2_float(float x, float y);
 Vec2 vec2_vec2(Vec2 vec);
@@ -322,9 +326,14 @@ Ray ray_change_origin(Ray ray, Vec3 new_origin);
 Ray ray_change_dir(Ray ray, Vec3 new_direction);
 bool ray_hits_box(Ray ray, Vec3 left_bot_back, Vec3 right_top_front, float *tmin, float *tmax);
 
+#ifdef __cplusplus
+}
+#endif
+
 #endif //VMM_H
 
 #ifdef VMM_IMPLEMENTATION
+
 Vec2 vec2_float(float x, float y) {
     return (Vec2){.x = x, .y = y};
 }
