@@ -1259,10 +1259,10 @@ Mat4 mat4_look_at(Vec3 eye, Vec3 center, Vec3 up) {
     Vec3 forward = vec3_sub(center, eye);
     forward = vec3_normalize(forward);
 
-    Vec3 right = vec3_cross(up, forward);
+    Vec3 right = vec3_cross(forward, up);
     right = vec3_normalize(right);
 
-    Vec3 new_up = vec3_cross(forward, right);
+    Vec3 new_up = vec3_cross(right, forward);
     ret.a = right.x;
     ret.b = right.y;
     ret.c = right.z;
@@ -1284,12 +1284,11 @@ Mat4 mat4_look_at(Vec3 eye, Vec3 center, Vec3 up) {
 }
 
 Mat4 mat4_make_model(Vec3 position, Vec3 rotation, Vec3 scale) {
-    Mat4 trans = mat4_translation(position.x, position.y, position.z);
-    Mat4 rotat = mat4_rotation(rotation.x, rotation.y, rotation.z);
-    Mat4 mscal = mat4_scale(scale.x, scale.y, scale.z);
-    Mat4 model = mat4_mul(mscal, rotat);
-    Mat4 nmodl = mat4_mul(model, trans);
-    return nmodl;
+	Mat4 Translation = mat4_translation(position.x, position.y, position.z);
+	Mat4 Rotation = mat4_rotation(rotation.x, rotation.y, rotation.z);
+	Mat4 Scale = mat4_scale(scale.x, scale.y, scale.z);
+
+    return mat4_mul(Scale, mat4_mul(Rotation, Translation));
 }
 
 Mat4 mat4_orthogonal(float left, float right, float bottom, float top, float zNear, float zFar) {
